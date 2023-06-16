@@ -2,11 +2,14 @@ class Solution:
     def threeSum(self, nums: list[int]) -> list[list[int]]:
         nums = sorted(nums)
         answer = []
-        answer2 = {}
+        index = {}
 
         length = len(nums)
 
-        for i in range(len(nums)):
+        for i,j in enumerate(nums):
+
+            if i>0 and j == nums[i-1]:
+                continue
 
             point_a = i+1
             point_b = length-1
@@ -17,7 +20,7 @@ class Solution:
             
             while point_a < point_b:
 
-                total = nums[i] + nums[point_a] + nums[point_b]
+                total = j + nums[point_a] + nums[point_b]
 
 
                 if total > 0:
@@ -31,13 +34,18 @@ class Solution:
 
                 if total == 0:
 
+                    current_sol = [j, nums[point_a], nums[point_b]]
+
                     try:
+                        index[str(current_sol)]+=1
+                        curr_index = index[str(current_sol)]
 
-                    index = answer2.setdefault(str([nums[i], nums[point_a], nums[point_b]]), 1)
+                    except:
+                        curr_index = index.setdefault(str(current_sol), 1)
                     
-                    if index==1:
+                    if curr_index==1:
 
-                        answer.append([nums[i], nums[point_a], nums[point_b]])
+                    answer.append(current_sol)
                     point_a+=1
       
                 
@@ -45,10 +53,6 @@ class Solution:
 
 
 
-a = {"[3]":1}
+a = Solution()
 
-a["2"] +=1
-a["2"] += 5
-
-
-print(a)
+print(a.threeSum([-1,0,1,2,-1,-4]))
