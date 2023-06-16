@@ -1,31 +1,30 @@
 class Solution:
     def twoSum(self, numbers, target):
 
-        length = len(numbers)
-
         answer = []
+        point_a = 0
+        point_b = len(numbers)-1
+        total = numbers[point_a] + numbers[point_b]
 
-        for i in numbers:
+        while total != target:
+        
+            if total > target:
+                point_b-=1
+                
+            if total < target:
+                point_a+=1
 
-            found = True
-
-            j = length-1
-
-            while i + numbers[j] != target:
-                j-=1
-                if numbers[j]==i:
-                    found = False
-                    break
-                found = False
-
-
-            if found: answer=[numbers.index(i), numbers.index(j)]
-
-
-
+            total = numbers[point_a] + numbers[point_b]
+               
+        answer = [point_a+1, point_b+1]
+                
+        return answer
 
 
-
-a = Solution
+a = Solution()
 
 print(a.twoSum([2,7,11,15], 9))
+
+
+
+
