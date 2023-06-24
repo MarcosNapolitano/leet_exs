@@ -2,22 +2,16 @@ class Solution:
     def maxArea(self, height: list[int]) -> int:
 
         answer = 0
+        point_a = 0
+        point_b = len(height)-1
 
-        length = len(height)
+        while point_a<point_b:
 
-        for i in range(length):
+            answer = max(answer, min(height[point_a], height[point_b]) * (point_b - point_a))
 
-            
-            point_b = length-1
-
-            while i<point_b:
-
-                current = (height[i] - (height[i] - height[point_b])) * point_b-i
-
-                print(height[i], height[point_b],(point_b-i))
-                print(current)
-                if current>answer: answer = current
-
+            if height[point_a]<=height[point_b]:  
+                point_a+=1
+            else:
                 point_b-=1
 
         return answer
@@ -26,4 +20,8 @@ class Solution:
 
 a = Solution()
 
-print(a.maxArea([1,8,6,2,5,4,8,3,7]))
+lol = [1,8,6,2,5,4,8,3,7]
+
+
+print(a.maxArea(horriblylarge))
+
