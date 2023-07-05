@@ -24,15 +24,11 @@ class Solution:
 
             if not current_1: 
                 current.next = current_2
-                current = current.next
-                current_2 = current_2.next
-                continue
+                break
 
             if not current_2: 
                 current.next = current_1
-                current = current.next
-                current_1 = current_1.next
-                continue
+                break
 
             if current_1.val <= current_2.val:
 
@@ -58,11 +54,6 @@ class Solution:
                 current_2 = current_2.next
 
             current = current.next
-
-
-
-
-        #tengo que hacer que retorne la lista en la que trabaja q siempre sea la misma
         
         return list3.next.next.next.val
 
