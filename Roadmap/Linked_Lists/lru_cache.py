@@ -38,12 +38,10 @@ class LRUCache:
 
     def get(self, key: int) -> int:
 
-        print(self.index.get(key))
-
 
         if self.index.get(key):  
 
-
+            if self.list.tail.key == key: return self.list.tail.data
 
             if self.capacity > 2:
 
@@ -58,28 +56,33 @@ class LRUCache:
                 self.list.tail = self.index[key]
 
             else:
+
                 self.list.head = self.list.tail
                 self.list.tail = self.index[key]
 
                 self.list.head.next = self.index[key]
                 self.index[key].prev = self.list.head
 
-            return self.index.get(key).val
+            print(self.index.get(key).data)
+            return self.index.get(key).data
 
-
-        return -1
+        else:
+            return -1
 
         
 
     def put(self, key: int, value: int) -> None:
 
-        try:
-            return self.get(key)
-        except:
+        if self.get(key)!=-1:
+
+            self.index[key].data = value
+
+        else:
 
             new_node = Node(value, key)
 
             #borramos el par del dict
+            print(self.index)
             del self.index[self.list.head.key]
             self.index[key] = new_node
 
@@ -98,24 +101,33 @@ class LRUCache:
                 self.list.tail = new_node
             
             else:
+
                 self.list.head = self.list.tail
                 self.list.tail = new_node
                 self.list.head.next = new_node
                 new_node.prev = self.list.head
-
+                
         
         return
 
 
 
 # Your LRUCache object will be instantiated and called as such:
-obj = LRUCache(2)
-obj.put(1,1)
-obj.put(2,2)
+obj = LRUCache(1)
+
+
+
+obj.put(2,1)
+
 print(obj.get(2))
-obj.put(1,1)
-obj.put(4,1)
-obj.get(2)
+obj.put(3,2)
+
+print(obj.get(2))
+print(obj.get(3))
+
+
+
+
 
 
 
